@@ -10,8 +10,8 @@ var gameState = ["", "", "", "",
                  "", "", "", "",
                  "", "", "", ""];
 
-var winningMessage = () => `Player ${currentPlayer} has won!`;
-var drawMessage = () => `Game ended in a draw!`;
+var winningMessage = () => `Player ${currentPlayer} Wins!`;
+var drawMessage = () => `Draw!`;
 var currentPlayerTurn = () => `${currentPlayer}'s turn`;
 
 statusDisplay.innerHTML = currentPlayerTurn();
