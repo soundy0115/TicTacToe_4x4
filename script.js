@@ -17,16 +17,20 @@ var currentPlayerTurn = () => `${currentPlayer}'s turn`;
 statusDisplay.innerHTML = currentPlayerTurn();
 
 var winningConditions = [
-    [0, 1, 2, 3],
-    [4, 5, 6, 7],
-    [8, 9, 10, 11],
-    [12, 13, 14, 15],
-    [0, 4, 8, 12],
-    [1, 5, 9, 13],
-    [2, 6, 10, 14],
-    [3, 7, 11, 15],
-    [0, 5, 10, 15],
-    [3, 6, 9, 12]
+    [0, 1, 2],      [1, 2, 3], // Horizontal Check
+    [4, 5, 6],      [5, 6, 7],
+    [8, 9, 10],     [9, 10, 11],
+    [12, 13, 14],   [13, 14, 15],
+    
+    [0, 4, 8],      [4, 8, 12], // Vertical Check
+    [1, 5, 9],      [5, 9, 13],
+    [2, 6, 10],     [6, 10, 14],
+    [3, 7, 11],     [7, 11, 15],
+
+    [0, 5, 10],     [5, 10, 15], // Diagonal Check
+    [1, 6, 11],     [4, 9, 14],
+    [3, 6, 9],      [6, 9, 12],
+    [2, 5, 8],      [7, 10, 13]
 ];
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
@@ -41,16 +45,15 @@ function handlePlayerChange() {
 
 function handleResultValidation() {
     let roundWon = false;
-    for (let i = 0; i <= 9; i++) {
+    for (let i = 0; i <=23; i++) {
         const winCondition = winningConditions[i];
         let a = gameState[winCondition[0]];
         let b = gameState[winCondition[1]];
         let c = gameState[winCondition[2]];
-        let d = gameState[winCondition[3]];
-        if (a === '' || b === '' || c === '' || d === '') {
+        if (a === '' || b === '' || c === '') {
             continue;
         }
-        if (a === b && b === c && c === d) {
+        if (a === b && b === c) {
             roundWon = true;
             break
         }
@@ -68,7 +71,6 @@ function handleResultValidation() {
         gameActive = false;
         return;
     }
-
     handlePlayerChange();
 }
 
